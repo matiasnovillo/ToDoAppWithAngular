@@ -1,0 +1,83 @@
+<div class="container">
+  <h1>Laboratorio</h1>
+  <h2>{{ welcome }}</h2>
+
+  <ul>
+    <li *ngFor="let task of tasks">
+      {{ task }}
+    </li>
+  </ul>
+
+  <hr />
+  <h1>JavaScript en strings interpolados</h1>
+  <h2>{{ 'Hola'.repeat(4) }}</h2>
+  <p>3+3 es igual a {{ 3+3 }}</p>
+
+  <hr />
+  <h1>Property Binding</h1>
+  <button [disabled]="disabled">Click me</button>
+  <img [src]="img" width="100px">
+  <p>person: {{ person.name }}</p>
+
+  <hr />
+  <h1>Event Binding</h1>
+  <button (click)="clickHandler()">Click me</button>
+  <p>Evento Change</p>
+  <input type="number" [value]="person().age" (change)="changeHandler($event)">
+  <p>Evento Keydown</p>
+  <input type="text" [value]="person().name" (keydown)="keyHandler($event)">
+  <p>Evento Keydown: Shift + T</p>
+  <input type="number" (keydown.shift.t)="clickHandler()">
+
+  <hr />
+  <h1>Signals (no es SignalR)</h1>
+  <p>Esto a continuacion es un signal:</p>
+  {{ nameForSignal() }}
+  <p>Ahora, una signal en un input:</p>
+  <input type="text" [value]="nameForSignal()" (keydown)="changeHandlerForSignal($event)">
+
+  <hr />
+  <h1>Estructuras de control: *ngFor y *ngIf</h1>
+  <p>*ngFor</p>
+  <ul>
+    <p>Total de elementos: {{ tasksForSignal().length}}</p>
+    <li *ngFor="let task of tasksForSignal(); index as i">
+      {{ i }} {{ task }}
+    </li>
+  </ul>
+  <p>*ngIf</p>
+  <input type="number" [value]="person().age" (change)="changeHandler2($event)">
+  <div *ngIf="person().age > 18; else elseBlock">
+    Soy mayor a 18
+  </div>
+  <ng-template #elseBlock>
+    Soy menor a 18
+  </ng-template>
+  <p>[ngSwitch]</p>
+  <div [ngSwitch]="person().name">
+    <p *ngSwitchCase="'Matias'">Yo soy Matias</p>
+    <p *ngSwitchCase="'Julian'">Yo soy Julian</p>
+    <p *ngSwitchDefault>Yo no soy estas personas</p>
+  </div>
+
+  <hr />
+  <h1>Inputs más profesionales con Angular</h1>
+  <input type="color" [formControl]="colorCtrl">
+  <p>Color: {{ colorCtrl.value }}</p>
+  <svg>
+    <g>
+      <rect x="0" y="0" height="100" width="100" [attr.fill]="colorCtrl.value" />
+    </g>
+  </svg>
+  <input type="number" [formControl]="widthCtrl">
+  <span class="box" [style.width.px]="widthCtrl.value"></span>
+
+  <hr />
+  <h1>Clases CSS dinamicas</h1>
+  <p>
+    <input type="text" [formControl]="nameCtrl">
+    <br />
+    <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre invalido</span>
+  </p>
+  <input type="text">
+</div>

@@ -1,0 +1,51 @@
+<section class="todoapp">
+  <header class="header">
+    <div class="container">
+      <h2>My Day</h2>
+      <p>All my tasks in one place</p>
+      <input class="new-todo" placeholder="Type new todo" autofocus type="text" [formControl]="ctrlNewTask"
+        (keydown.enter)="addTask()" />
+    </div>
+  </header>
+  <div class="container todoapp-wrapper">
+    <section class="main">
+      <ul class="todo-list">
+        <li *ngFor="let task of lstTaskByFilter(); index as i" [class.editing]="task.editing"
+          [class.completed]="task.completed" (dblclick)="updateTaskEditingMode(i)">
+          <div class="view">
+            <input class="toggle" type="checkbox" (change)="checkTask(i)" />
+            <label>{{ task.title }}</label>
+            <button class="destroy" (click)="deleteTask(i)"></button>
+          </div>
+          <input class="edit" [value]="task.title" (keydown.enter)="updateTaskSave(i, $event)" />
+        </li>
+      </ul>
+    </section>
+    <footer class="footer">
+      <div *ngIf="lstTaskByFilter().length > 1 ; else notSingular">
+        <span class="todo-count">
+          <strong>{{ lstTaskByFilter().length }}</strong>
+          items
+        </span>
+      </div>
+      <ng-template #notSingular>
+        <span class="todo-count">
+          <strong>{{ lstTaskByFilter().length }}</strong>
+          item
+        </span>
+      </ng-template>
+      <ul class="filters">
+        <li>
+          <a (click)="changeFilter('all')" [class.selected]="filter() === 'all'">All</a>
+        </li>
+        <li>
+          <a (click)="changeFilter('pending')" [class.selected]="filter() === 'pending'">Pending</a>
+        </li>
+        <li>
+          <a (click)="changeFilter('completed')" [class.selected]="filter() === 'completed'">Completed</a>
+        </li>
+      </ul>
+      <button class="clear-completed" (click)="clearCompletedTask()">Clear completed</button>
+    </footer>
+  </div>
+</section>
