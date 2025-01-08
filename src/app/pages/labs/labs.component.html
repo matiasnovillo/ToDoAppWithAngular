@@ -88,4 +88,35 @@
   } @else {
   <div>Soy menor a 18</div>
   }
+
+  <hr />
+  <h1>For nuevo en Angular</h1>
+  <ul>
+    @for(task of tasksForSignal(); track task; let i = $index){
+    <li>{{ i }} {{ task }}</li>
+    } @empty {
+    <li>
+      <strong>La lista esta vacia</strong>
+    </li>
+    }
+  </ul>
+
+  <hr />
+  <h1>Switch nuevo en Angular</h1>
+  <div>
+    @switch(person().name){
+    @case('nicolas') {
+    <p>yo soy nicolas</p>
+    }
+    @case('ana') {
+    <p>yo soy nicolas</p>
+    }
+    @case('julian') {
+    <p>yo soy nicolas</p>
+    }
+    @default {
+    <p>yo no soy nadie</p>
+    }
+    }
+  </div>
 </div>
