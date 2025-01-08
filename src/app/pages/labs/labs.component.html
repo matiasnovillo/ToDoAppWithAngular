@@ -80,4 +80,12 @@
     <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre invalido</span>
   </p>
   <input type="text">
+
+  <hr />
+  <h1>If y else nuevos en Angular</h1>
+  @if(person().age > 18) {
+  <div>Soy mayor a 18</div>
+  } @else {
+  <div>Soy menor a 18</div>
+  }
 </div>
